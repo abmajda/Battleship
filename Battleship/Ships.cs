@@ -49,12 +49,28 @@ namespace Battleship
             }
         }
 
-        // check if the coords provided is in the ships location
-        public bool checkHit(Coords shot)
+        // check if the shot hits and subtract health if it did
+        public bool CheckHit(Coords shot)
         {
             foreach (Coords space in location)
             {
                 if (shot.Equals(space))
+                {
+                    health--;
+                    return true;
+                }
+            }
+
+            // if no match is found return false
+            return false;
+        }
+
+        // check if the coords provided is in the ships location, do not take away health, this is used for checking collisions when placing ships
+        public bool CheckCollision(Coords placed)
+        {
+            foreach (Coords space in location)
+            {
+                if (placed.Equals(space))
                     return true;
             }
 
@@ -63,7 +79,7 @@ namespace Battleship
         }
 
         // check if the ship is sunk
-        public bool sunk()
+        public bool Sunk()
         {
             if (health == 0)
                 return true;
