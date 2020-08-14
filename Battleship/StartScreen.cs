@@ -16,5 +16,24 @@ namespace Battleship
         {
             InitializeComponent();
         }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void AIButton_Click(object sender, EventArgs e)
+        {
+            Form Game = new MainScreen(true);
+            Game.ShowDialog();
+            Dispose();
+        }
+
+        private void MPButton_Click(object sender, EventArgs e)
+        {
+            Form Game = new MainScreen(false);
+            Game.ShowDialog();
+            Dispose();
+        }
     }
 }

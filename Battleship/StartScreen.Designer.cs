@@ -39,7 +39,7 @@
             // 
             this.MainLogo.AutoSize = true;
             this.MainLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainLogo.Location = new System.Drawing.Point(88, 45);
+            this.MainLogo.Location = new System.Drawing.Point(82, 41);
             this.MainLogo.Name = "MainLogo";
             this.MainLogo.Size = new System.Drawing.Size(167, 37);
             this.MainLogo.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             this.ShamelessPlug.AutoSize = true;
             this.ShamelessPlug.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShamelessPlug.Location = new System.Drawing.Point(74, 101);
+            this.ShamelessPlug.Location = new System.Drawing.Point(66, 97);
             this.ShamelessPlug.Name = "ShamelessPlug";
             this.ShamelessPlug.Size = new System.Drawing.Size(198, 20);
             this.ShamelessPlug.TabIndex = 1;
@@ -63,6 +63,7 @@
             this.AIButton.TabIndex = 2;
             this.AIButton.Text = "Play against AI";
             this.AIButton.UseVisualStyleBackColor = true;
+            this.AIButton.Click += new System.EventHandler(this.AIButton_Click);
             // 
             // MPButton
             // 
@@ -72,6 +73,7 @@
             this.MPButton.TabIndex = 3;
             this.MPButton.Text = "Play Multiplayer";
             this.MPButton.UseVisualStyleBackColor = true;
+            this.MPButton.Click += new System.EventHandler(this.MPButton_Click);
             // 
             // CloseButton
             // 
@@ -81,6 +83,7 @@
             this.CloseButton.TabIndex = 4;
             this.CloseButton.Text = "Exit";
             this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // StartScreen
             // 
@@ -92,8 +95,10 @@
             this.Controls.Add(this.AIButton);
             this.Controls.Add(this.ShamelessPlug);
             this.Controls.Add(this.MainLogo);
+            this.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.MaximizeBox = false;
             this.Name = "StartScreen";
-            this.Text = "Form1";
+            this.Text = "Battleship";
             this.ResumeLayout(false);
             this.PerformLayout();
 

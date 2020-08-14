@@ -12,9 +12,16 @@ namespace Battleship
 {
     public partial class MainScreen : Form
     {
-        public MainScreen()
+        bool AIGame;
+
+        public MainScreen(bool AI)
         {
             InitializeComponent();
+
+            if (AI)
+                AIGame = true;
+            else
+                AIGame = false;
         }
     }
 }
