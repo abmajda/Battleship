@@ -24,6 +24,7 @@ namespace Battleship
 
         private void AIButton_Click(object sender, EventArgs e)
         {
+            Hide();
             Form Game = new MainScreen(true);
             Game.ShowDialog();
             Dispose();
@@ -31,6 +32,7 @@ namespace Battleship
 
         private void MPButton_Click(object sender, EventArgs e)
         {
+            Hide();
             Form Game = new MainScreen(false);
             Game.ShowDialog();
             Dispose();
