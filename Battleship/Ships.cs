@@ -19,7 +19,7 @@ namespace Battleship
         }
     }
 
-    // used as a return when validating ship placements
+    // used as a return when validating ship placements for the AI
     public struct ShipPlacement
     {
         public Coords startPosition { get; }
