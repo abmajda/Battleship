@@ -19,6 +19,19 @@ namespace Battleship
         }
     }
 
+    // used as a return when validating ship placements
+    public struct ShipPlacement
+    {
+        public Coords startPosition { get; }
+        public bool horizontal { get; }
+
+        public ShipPlacement(Coords start, bool Horizontal)
+        {
+            startPosition = start;
+            horizontal = Horizontal;
+        }
+    }
+
     // the base class for all ships. Abstract class all ships will derive from it
     public abstract class Ship
     {
