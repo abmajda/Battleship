@@ -1617,7 +1617,7 @@
             this.PlaceButton.Name = "PlaceButton";
             this.PlaceButton.Size = new System.Drawing.Size(130, 27);
             this.PlaceButton.TabIndex = 4;
-            this.PlaceButton.Text = "Place Ship";
+            this.PlaceButton.Text = "Confirm Ship Placement";
             this.PlaceButton.UseVisualStyleBackColor = true;
             this.PlaceButton.Click += new System.EventHandler(this.PlaceButton_Click);
             // 
