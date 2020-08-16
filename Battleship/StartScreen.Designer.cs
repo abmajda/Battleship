@@ -40,8 +40,9 @@
             // MainLogo
             // 
             this.MainLogo.AutoSize = true;
-            this.MainLogo.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.MainLogo.BackColor = System.Drawing.Color.DodgerBlue;
             this.MainLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MainLogo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.MainLogo.Location = new System.Drawing.Point(82, 41);
             this.MainLogo.Name = "MainLogo";
             this.MainLogo.Size = new System.Drawing.Size(167, 37);
@@ -51,8 +52,9 @@
             // ShamelessPlug
             // 
             this.ShamelessPlug.AutoSize = true;
-            this.ShamelessPlug.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.ShamelessPlug.BackColor = System.Drawing.Color.DodgerBlue;
             this.ShamelessPlug.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShamelessPlug.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.ShamelessPlug.Location = new System.Drawing.Point(66, 97);
             this.ShamelessPlug.Name = "ShamelessPlug";
             this.ShamelessPlug.Size = new System.Drawing.Size(198, 20);
@@ -92,7 +94,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.pictureBox1.BackColor = System.Drawing.Color.DodgerBlue;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
