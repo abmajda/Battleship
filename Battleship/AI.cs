@@ -124,12 +124,30 @@ namespace Battleship
         }
 
         // go through each placed ship and ensure there are no collisions to worry about
-        private bool ValidatePlaces(Coords placement)
+        private bool ValidatePlaces(ShipPlacement trial, int size)
         {
             foreach (Ship ship in ships)
             {
-                if (ship.CheckCollision(placement))
-                    return false;
+                if (trial.horizontal)
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        if (ship.CheckCollision(new Coords((trial.startPosition.x + i), trial.startPosition.y)))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        if (ship.CheckCollision(new Coords(trial.startPosition.x, (trial.startPosition.y + i))))
+                        {
+                            return false;
+                        }
+                    }
+                }
             }
 
             return true;
@@ -140,17 +158,23 @@ namespace Battleship
         {
             bool horizontal;
             bool validPlacement = false;
-            Coords trial;
+            ShipPlacement trial = new ShipPlacement();
 
             horizontal = (randomizer.Next(2) == 0);
             if (horizontal)
-                trial = new Coords(randomizer.Next(10 - size), randomizer.Next(10));
+            {
+                trial.startPosition = new Coords(randomizer.Next(10 - size), randomizer.Next(10));
+                trial.horizontal = true;
+            }
             else
-                trial = new Coords(randomizer.Next(10), randomizer.Next(10 - size));
+            {
+                trial.startPosition = new Coords(randomizer.Next(10), randomizer.Next(10 - size));
+                trial.horizontal = false;
+            }
 
             while (!validPlacement)
             {
-                if (ValidatePlaces(trial))
+                if (ValidatePlaces(trial, size))
                 {
                     validPlacement = true;
                 }
@@ -158,13 +182,19 @@ namespace Battleship
                 {
                     horizontal = (randomizer.Next(2) == 0);
                     if (horizontal)
-                        trial = new Coords(randomizer.Next(10 - size), randomizer.Next(10));
+                    {
+                        trial.startPosition = new Coords(randomizer.Next(10 - size), randomizer.Next(10));
+                        trial.horizontal = true;
+                    }
                     else
-                        trial = new Coords(randomizer.Next(10), randomizer.Next(10 - size));
+                    {
+                        trial.startPosition = new Coords(randomizer.Next(10), randomizer.Next(10 - size));
+                        trial.horizontal = false;
+                    }
                 }
             }
 
-            return new ShipPlacement(trial, horizontal);
+            return trial;
         }
     }
 }

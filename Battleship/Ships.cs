@@ -22,8 +22,8 @@ namespace Battleship
     // used as a return when validating ship placements for the AI
     public struct ShipPlacement
     {
-        public Coords startPosition { get; }
-        public bool horizontal { get; }
+        public Coords startPosition { get; set; }
+        public bool horizontal { get; set; }
 
         public ShipPlacement(Coords start, bool Horizontal)
         {
@@ -78,7 +78,7 @@ namespace Battleship
             return false;
         }
 
-        // check if the coords provided is in the ships location, do not take away health, this is used for checking collisions when placing ships
+        // check if the coords provided is in the ships location, do not take away health, this is used for checking collisions when placing ships by the AI
         public bool CheckCollision(Coords placed)
         {
             foreach (Coords space in location)
