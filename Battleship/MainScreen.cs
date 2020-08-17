@@ -31,6 +31,8 @@ namespace Battleship
         List<Coords> placementOutline;
         // a boolean to check if the position for placement is valid
         bool validPlacement = false;
+        // a placeholder for an AI to be initialized if play against the aI is selected
+        AIOpponent AI;
 
 
         public MainScreen(bool AISelection)
@@ -50,17 +52,12 @@ namespace Battleship
             // set the flag for if this is an AI game or not
             if (AISelection)
             {
-                // implement SP game here
+                AI = new AIOpponent();
             }
             else
             {
                 // implement MP game here
             }
-        }
-
-        private void StartGame()
-        {
-
         }
 
         private void PositionClick(object sender, EventArgs e)
@@ -179,14 +176,41 @@ namespace Battleship
                     for (int j = 0; j < 10; j++)
                     {
                         BoardTable.GetControlFromPosition(i, j).Enabled = false;
+                        OpponentBoard.GetControlFromPosition(i, j).Enabled = true;
                     }
                 }
 
                 PlaceButton.Enabled = false;
-
-                // start the formal game
-                StartGame();
             }
+        }
+
+        private void TakeShot(object sender, EventArgs e)
+        {
+            // consider adding a check for type in the future to made it more modular
+            Label selected = (Label)sender;
+
+            // create a Coords for the player shot and send it to the opponent
+            if (selected.BackColor == Color.DodgerBlue)
+            {
+                Coords playerShot = new Coords(OpponentBoard.GetRow(selected), OpponentBoard.GetColumn(selected));
+                int result = AI.ResolveShot(playerShot);
+                if (result == 0)
+                {
+                    selected.BackColor = Color.AliceBlue;
+                }
+                else
+                {
+                    selected.BackColor = Color.Red;
+                    // temporary code
+                    if (result > 1)
+                    {
+                        MessageBox.Show("You sunk a ship", "woohoo");
+                    }
+                }
+            }
+            // if the have already selected that space it will not be the normal color and we can discout their click
+            else
+                return;
         }
     }
 }

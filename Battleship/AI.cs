@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class AI
+    class AIOpponent
     {
         private List<Coords> pastGuesses = new List<Coords>();
         private List<Ship> ships = new List<Ship>();
         Random randomizer = new Random();
 
-        public AI()
+        public AIOpponent()
         {
             SetupShips();
         }
@@ -58,6 +58,8 @@ namespace Battleship
                     // if we sunk a ship, report it's ship code to announce it is sunkr
                     if (ship.Sunk())
                     {
+                        // if all ships are sunk send a code of 7 for the game is won
+
                         // Carrier ship code is 6
                         if (ship is Carrier)
                         {

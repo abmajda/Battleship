@@ -36,7 +36,7 @@ namespace Battleship
     public abstract class Ship
     {
         protected int health;
-        protected int size;
+        abstract public int size { get; }
         protected List<Coords> location;
 
         // places the ship and initialize it's health
@@ -104,15 +104,23 @@ namespace Battleship
     // derived class for the carrier
     public class Carrier : Ship
     {
-        protected new int size = 5;
+        public override int size
+        {
+            get { return 5; }
+        }
         // places the ship and initialize it's health
-        public Carrier(Coords start, bool horizontal) : base(start, horizontal) { }
+        public Carrier(Coords start, bool horizontal) : base(start, horizontal)
+        {
+        }
     }
 
     // derived class for the Battleship
     public class Battleship : Ship
     {
-        protected new int size = 4;
+        public override int size
+        {
+            get { return 4; }
+        }
         // places the ship and initialize it's health
         public Battleship(Coords start, bool horizontal) : base(start, horizontal) { }
     }
@@ -120,7 +128,10 @@ namespace Battleship
     // derived class for the Destroyer
     public class Destroyer : Ship
     {
-        protected new int size = 3;
+        public override int size
+        {
+            get { return 3; }
+        }
         // places the ship and initialize it's health
         public Destroyer(Coords start, bool horizontal) : base(start, horizontal) { }
     }
@@ -128,7 +139,10 @@ namespace Battleship
     // derived class for the Submarine
     public class Submarine : Ship
     {
-        protected new int size = 3;
+        public override int size
+        {
+            get { return 3; }
+        }
         // places the ship and initialize it's health
         public Submarine(Coords start, bool horizontal) : base(start, horizontal) { }
     }
@@ -136,7 +150,10 @@ namespace Battleship
     // derived class for the PTBoat
     public class PTBoat : Ship
     {
-        protected new int size = 2;
+        public override int size
+        {
+            get { return 2; }
+        }
         // places the ship and initialize it's health
         public PTBoat(Coords start, bool horizontal) : base(start, horizontal) { }
     }
