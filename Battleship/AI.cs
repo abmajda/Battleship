@@ -48,7 +48,7 @@ namespace Battleship
             ships.Add(ptboat);
         }
         
-        // resolves the shot against the player
+        // resolves the shot from the player
         public int ResolveShot(Coords playerShot)
         {
             foreach (Ship ship in ships)
@@ -58,8 +58,7 @@ namespace Battleship
                     // if we sunk a ship, report it's ship code to announce it is sunkr
                     if (ship.Sunk())
                     {
-                        // if all ships are sunk send a code of 7 for the game is won
-
+                        // if all ships are sunk
                         // Carrier ship code is 6
                         if (ship is Carrier)
                         {
@@ -105,7 +104,10 @@ namespace Battleship
             while (!validGuess)
             {
                 if (ValidateGuess(guess))
+                {
                     validGuess = true;
+                    pastGuesses.Add(guess);
+                }
                 else
                     guess = new Coords(randomizer.Next(10), randomizer.Next(10));
             }

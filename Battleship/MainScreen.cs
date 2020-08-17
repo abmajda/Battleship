@@ -33,6 +33,8 @@ namespace Battleship
         bool validPlacement = false;
         // a placeholder for an AI to be initialized if play against the aI is selected
         AIOpponent AI;
+        // the players ship locations
+        List<Ship> playerShips;
 
 
         public MainScreen(bool AISelection)
@@ -40,6 +42,7 @@ namespace Battleship
             InitializeComponent();
 
             placementOutline = new List<Coords>();
+            playerShips = new List<Ship>();
 
             // set up the queue of ships to place
             shipsToPlace = new Queue<ShipInfo>();
@@ -72,7 +75,7 @@ namespace Battleship
             validPlacement = true;
 
             // display horizontal if this is the first click or if the label is the same one clicked 
-            if (placementOutline.Count == 0 || ((placementOutline[0].x != BoardTable.GetRow(selected)) || (placementOutline[0].y != BoardTable.GetColumn(selected))))
+            if (placementOutline.Count == 0 || ((placementOutline[0].x != BoardTable.GetColumn(selected)) || (placementOutline[0].y != BoardTable.GetRow(selected))))
             {
                 // get rid of the old outline
                 resetOutline();
@@ -86,7 +89,7 @@ namespace Battleship
                 // make a new outline, checking if it's valid
                 for (int i = 0; i < size; i++)
                 {
-                    placementOutline.Add(new Coords(startRow, (startColumn + i)));
+                    placementOutline.Add(new Coords((startColumn + i), startRow));
 
                     // if the space has a ship already in it mark as invalid
                     if (BoardTable.GetControlFromPosition((startColumn + i), startRow).Text != "")
@@ -108,7 +111,7 @@ namespace Battleship
                 // make a new outline, checking if it's valid
                 for (int i = 0; i < size; i++)
                 {
-                    placementOutline.Add(new Coords((startRow + i), startColumn));
+                    placementOutline.Add(new Coords(startColumn, (startRow + i)));
 
                     // if the space has a ship already in it mark as invalid
                     if (BoardTable.GetControlFromPosition(startColumn, (startRow + i)).Text != "")
@@ -119,7 +122,7 @@ namespace Battleship
             // display the placeholder on the board
             foreach (Coords coords in placementOutline)
             {
-                Control label = BoardTable.GetControlFromPosition(coords.y, coords.x);
+                Control label = BoardTable.GetControlFromPosition(coords.x, coords.y);
                 if (validPlacement)
                     label.BackColor = Color.Lime;
                 else
@@ -133,7 +136,7 @@ namespace Battleship
         {
             foreach (Coords coords in placementOutline)
             {
-                Control label = BoardTable.GetControlFromPosition(coords.y, coords.x);
+                Control label = BoardTable.GetControlFromPosition(coords.x, coords.y);
                 label.BackColor = Color.DodgerBlue;
             }
 
@@ -162,9 +165,27 @@ namespace Battleship
                 // for every coordinate reset the background color and set the symbol
                 foreach (Coords coords in placementOutline)
                 {
-                    Control label = BoardTable.GetControlFromPosition(coords.y, coords.x);
+                    Control label = BoardTable.GetControlFromPosition(coords.x, coords.y);
                     label.BackColor = Color.DodgerBlue;
                     label.Text = symbol;
+                }
+
+                // if the first two coords have the same y value it is horizontal, then add the ship based on the symbol
+                // side note: I could probably find a more elegant way to do this but I was feeling tired and just needed it implemented
+                bool horizontal = (placementOutline[0].y == placementOutline[1].y);
+                if (symbol == "C")
+                    playerShips.Add(new Carrier(placementOutline[0], horizontal));
+                else if (symbol == "B")
+                    playerShips.Add(new Battleship(placementOutline[0], horizontal));
+                else if (symbol == "D")
+                    playerShips.Add(new Destroyer(placementOutline[0], horizontal));
+                else if (symbol == "S")
+                    playerShips.Add(new Submarine(placementOutline[0], horizontal));
+                else if (symbol == "P")
+                    playerShips.Add(new PTBoat(placementOutline[0], horizontal));
+                else
+                {
+                    // *** implement the somethign has gone horribly wrong contingency ***
                 }
             }
 
@@ -211,6 +232,68 @@ namespace Battleship
             // if the have already selected that space it will not be the normal color and we can discout their click
             else
                 return;
+
+            // now the opponent shoots at us **temporary code ***
+            Coords opponentShot = AI.TakeTurn();
+            int shotResult = ResolveShot(opponentShot);
+            Control label = BoardTable.GetControlFromPosition(opponentShot.x, opponentShot.y);
+
+            // *** expand out, super temporary code ***
+            if (shotResult == 0)
+            {
+                label.BackColor = Color.AliceBlue;
+            }
+            else
+            {
+                label.BackColor = Color.Red;
+            }
+        }
+
+        // resolves the shot against the player
+        public int ResolveShot(Coords opponentShot)
+        {
+            foreach (Ship ship in playerShips)
+            {
+                if (ship.CheckHit(opponentShot))
+                {
+                    // if we sunk a ship, report it's ship code to announce it is sunkr
+                    if (ship.Sunk())
+                    {
+                        // if all ships are sunk
+                        // Carrier ship code is 6
+                        if (ship is Carrier)
+                        {
+                            return 6;
+                        }
+                        // Battleship ship code is 5
+                        else if (ship is Battleship)
+                        {
+                            return 5;
+                        }
+                        // Destroyer ship code is 4
+                        else if (ship is Destroyer)
+                        {
+                            return 4;
+                        }
+                        // Submarine ship code is 3
+                        else if (ship is Submarine)
+                        {
+                            return 3;
+                        }
+                        // PTBoat ship code is 2
+                        else if (ship is PTBoat)
+                        {
+                            return 2;
+                        }
+                    }
+
+                    // return a 1 to indicate generic hit if no ships are sunk
+                    return 1;
+                }
+            }
+
+            // if nothing is hit return a 0 to indicate miss
+            return 0;
         }
     }
 }
