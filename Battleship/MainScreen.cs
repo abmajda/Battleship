@@ -225,7 +225,7 @@ namespace Battleship
                     // temporary code
                     if (result > 1)
                     {
-                        MessageBox.Show("You sunk a ship", "woohoo");
+
                     }
                 }
             }
@@ -236,6 +236,7 @@ namespace Battleship
             // now the opponent shoots at us **temporary code ***
             Coords opponentShot = AI.TakeTurn();
             int shotResult = ResolveShot(opponentShot);
+            AI.Report(shotResult);
             Control label = BoardTable.GetControlFromPosition(opponentShot.x, opponentShot.y);
 
             // *** expand out, super temporary code ***
@@ -256,7 +257,7 @@ namespace Battleship
             {
                 if (ship.CheckHit(opponentShot))
                 {
-                    // if we sunk a ship, report it's ship code to announce it is sunkr
+                    // if we sunk a ship, report it's ship code to announce it is sunk
                     if (ship.Sunk())
                     {
                         // if all ships are sunk

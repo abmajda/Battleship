@@ -130,12 +130,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.OpponentBoard = new System.Windows.Forms.TableLayoutPanel();
-            this.CloseButton = new System.Windows.Forms.Button();
-            this.PlaceButton = new System.Windows.Forms.Button();
-            this.TopStatusLabel = new System.Windows.Forms.Label();
-            this.BottomStatusLabel = new System.Windows.Forms.Label();
-            this.BoardLabel = new System.Windows.Forms.Label();
-            this.OpponentLabel = new System.Windows.Forms.Label();
             this.label101 = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
             this.label103 = new System.Windows.Forms.Label();
@@ -236,6 +230,12 @@
             this.label198 = new System.Windows.Forms.Label();
             this.label199 = new System.Windows.Forms.Label();
             this.label200 = new System.Windows.Forms.Label();
+            this.CloseButton = new System.Windows.Forms.Button();
+            this.PlaceButton = new System.Windows.Forms.Button();
+            this.TopStatusLabel = new System.Windows.Forms.Label();
+            this.BottomStatusLabel = new System.Windows.Forms.Label();
+            this.BoardLabel = new System.Windows.Forms.Label();
+            this.OpponentLabel = new System.Windows.Forms.Label();
             this.BoardTable.SuspendLayout();
             this.OpponentBoard.SuspendLayout();
             this.SuspendLayout();
@@ -1902,62 +1902,6 @@
             this.OpponentBoard.Size = new System.Drawing.Size(334, 279);
             this.OpponentBoard.TabIndex = 1;
             // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(365, 401);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(101, 48);
-            this.CloseButton.TabIndex = 3;
-            this.CloseButton.Text = "Exit";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
-            // PlaceButton
-            // 
-            this.PlaceButton.Location = new System.Drawing.Point(352, 134);
-            this.PlaceButton.Name = "PlaceButton";
-            this.PlaceButton.Size = new System.Drawing.Size(130, 27);
-            this.PlaceButton.TabIndex = 4;
-            this.PlaceButton.Text = "Confirm Ship Placement";
-            this.PlaceButton.UseVisualStyleBackColor = true;
-            this.PlaceButton.Click += new System.EventHandler(this.PlaceButton_Click);
-            // 
-            // TopStatusLabel
-            // 
-            this.TopStatusLabel.Location = new System.Drawing.Point(317, 323);
-            this.TopStatusLabel.Name = "TopStatusLabel";
-            this.TopStatusLabel.Size = new System.Drawing.Size(200, 15);
-            this.TopStatusLabel.TabIndex = 5;
-            this.TopStatusLabel.Text = "You scored a hit!";
-            this.TopStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BottomStatusLabel
-            // 
-            this.BottomStatusLabel.Location = new System.Drawing.Point(317, 348);
-            this.BottomStatusLabel.Name = "BottomStatusLabel";
-            this.BottomStatusLabel.Size = new System.Drawing.Size(200, 15);
-            this.BottomStatusLabel.TabIndex = 6;
-            this.BottomStatusLabel.Text = "Your battleship was sunk";
-            this.BottomStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // BoardLabel
-            // 
-            this.BoardLabel.AutoSize = true;
-            this.BoardLabel.Location = new System.Drawing.Point(114, 294);
-            this.BoardLabel.Name = "BoardLabel";
-            this.BoardLabel.Size = new System.Drawing.Size(60, 13);
-            this.BoardLabel.TabIndex = 7;
-            this.BoardLabel.Text = "Your Board";
-            // 
-            // OpponentLabel
-            // 
-            this.OpponentLabel.AutoSize = true;
-            this.OpponentLabel.Location = new System.Drawing.Point(596, 294);
-            this.OpponentLabel.Name = "OpponentLabel";
-            this.OpponentLabel.Size = new System.Drawing.Size(115, 13);
-            this.OpponentLabel.TabIndex = 8;
-            this.OpponentLabel.Text = "Your Opponents Board";
-            // 
             // label101
             // 
             this.label101.AutoSize = true;
@@ -3157,6 +3101,62 @@
             this.label200.TabIndex = 99;
             this.label200.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label200.Click += new System.EventHandler(this.TakeShot);
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(365, 401);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(101, 48);
+            this.CloseButton.TabIndex = 3;
+            this.CloseButton.Text = "Exit";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // PlaceButton
+            // 
+            this.PlaceButton.Location = new System.Drawing.Point(352, 134);
+            this.PlaceButton.Name = "PlaceButton";
+            this.PlaceButton.Size = new System.Drawing.Size(130, 27);
+            this.PlaceButton.TabIndex = 4;
+            this.PlaceButton.Text = "Confirm Ship Placement";
+            this.PlaceButton.UseVisualStyleBackColor = true;
+            this.PlaceButton.Click += new System.EventHandler(this.PlaceButton_Click);
+            // 
+            // TopStatusLabel
+            // 
+            this.TopStatusLabel.Location = new System.Drawing.Point(317, 323);
+            this.TopStatusLabel.Name = "TopStatusLabel";
+            this.TopStatusLabel.Size = new System.Drawing.Size(200, 15);
+            this.TopStatusLabel.TabIndex = 5;
+            this.TopStatusLabel.Text = "You scored a hit!";
+            this.TopStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BottomStatusLabel
+            // 
+            this.BottomStatusLabel.Location = new System.Drawing.Point(317, 348);
+            this.BottomStatusLabel.Name = "BottomStatusLabel";
+            this.BottomStatusLabel.Size = new System.Drawing.Size(200, 15);
+            this.BottomStatusLabel.TabIndex = 6;
+            this.BottomStatusLabel.Text = "Your battleship was sunk";
+            this.BottomStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BoardLabel
+            // 
+            this.BoardLabel.AutoSize = true;
+            this.BoardLabel.Location = new System.Drawing.Point(114, 294);
+            this.BoardLabel.Name = "BoardLabel";
+            this.BoardLabel.Size = new System.Drawing.Size(60, 13);
+            this.BoardLabel.TabIndex = 7;
+            this.BoardLabel.Text = "Your Board";
+            // 
+            // OpponentLabel
+            // 
+            this.OpponentLabel.AutoSize = true;
+            this.OpponentLabel.Location = new System.Drawing.Point(596, 294);
+            this.OpponentLabel.Name = "OpponentLabel";
+            this.OpponentLabel.Size = new System.Drawing.Size(115, 13);
+            this.OpponentLabel.TabIndex = 8;
+            this.OpponentLabel.Text = "Your Opponents Board";
             // 
             // MainScreen
             // 
