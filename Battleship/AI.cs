@@ -12,6 +12,7 @@ namespace Battleship
         private List<Coords> pastHits = new List<Coords>();
         private List<Coords> hitArea = new List<Coords>();
         private Queue<Coords> multiHit = new Queue<Coords>();
+        private Queue<Queue<Coords>> chainedMultiHits = new Queue<Queue<Coords>>();
         private Coords directionModifier;
         private Coords hitSpot;
         private List<Ship> ships = new List<Ship>();
@@ -141,10 +142,17 @@ namespace Battleship
                         break;
                     case 6:
                         reverseDirection();
+                        AIstate = 8;
                         break;
                     case 7:
                         reverseDirection();
-                        AIstate = 6;
+                        AIstate = 8;
+                        break;
+                    case 8:
+                        SaveMultiHit();
+                        break;
+                    case 9:
+                        SaveMultiHit();
                         break;
                     default:
                         AIstate = 1;
@@ -186,6 +194,13 @@ namespace Battleship
                         AIstate = 7;
                         break;
                     case 7:
+                        pastHits.Add(guess);
+                        break;
+                    case 8:
+                        pastHits.Add(guess);
+                        AIstate = 9;
+                        break;
+                    case 9:
                         pastHits.Add(guess);
                         break;
                     default:
@@ -328,6 +343,87 @@ namespace Battleship
                             AIstate = 6;
                         }
                         break;
+                    case 8:
+                        if (pastHits.Count == size)
+                        {
+                            pastHits.Clear();
+                            if (multiHit.Count == 0)
+                            {
+                                resetState();
+                                AIstate = 1;
+                            }
+                            else
+                            {
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                            }
+                        }
+                        else
+                        {
+                            TrimHits(size);
+                            SaveMultiHit();
+
+                            // get a new multihit going
+                            if (multiHit.Count == 0)
+                            {
+                                multiHit = chainedMultiHits.Dequeue();
+                                pastHits.Clear();
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                                findDirectionMulti(hitSpot);
+                                AIstate = 6;
+                            }
+                            // save for later
+                            else
+                            {
+                                pastHits.Clear();
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                                AIstate = 6;
+                            }
+                        }
+                        break;
+                    case 9:
+                        if (pastHits.Count == size)
+                        {
+                            pastHits.Clear();
+                            if (multiHit.Count == 0)
+                            {
+                                resetState();
+                                AIstate = 1;
+                            }
+                            else
+                            {
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                                AIstate = 6;
+                            }
+                        }
+                        else
+                        {
+                            TrimHits(size);
+                            SaveMultiHit();
+
+                            // get a new multihit going
+                            if (multiHit.Count == 0)
+                            {
+                                multiHit = chainedMultiHits.Dequeue();
+                                pastHits.Clear();
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                                findDirectionMulti(hitSpot);
+                                AIstate = 6;
+                            }
+                            // save for later
+                            else
+                            {
+                                pastHits.Clear();
+                                hitSpot = multiHit.Dequeue();
+                                pastHits.Add(hitSpot);
+                                AIstate = 6;
+                            }
+                        }
+                        break;
                     default:
                         resetState();
                         AIstate = 1;
@@ -350,6 +446,8 @@ namespace Battleship
              * 5 - continuing the direction following the reversal, similar to state 3
              * 6 - go to a multihit location and start going, similar to state 4
              * 7 - continue the direction, similar to state 3 and 5
+             * 8 - When we have already flipped during the multihit stage, look out for multihits within multihits
+             * 9 - contrinuing along post reverse looking out for multihits within multihits
              * */
 
             while (!valid)
@@ -422,6 +520,27 @@ namespace Battleship
                         else
                             Report(0);
                         break;
+                    case 8:
+                        guess = new Coords((hitSpot.x + directionModifier.x), (hitSpot.y + directionModifier.y));
+                        if (ValidateGuess(guess))
+                        {
+                            pastGuesses.Add(guess);
+                            valid = true;
+                        }
+                        else
+                            Report(0);
+                        break;
+                    case 9:
+                        lastGuess = pastGuesses[pastGuesses.Count - 1];
+                        guess = new Coords((lastGuess.x + directionModifier.x), (lastGuess.y + directionModifier.y));
+                        if (ValidateGuess(guess))
+                        {
+                            pastGuesses.Add(guess);
+                            valid = true;
+                        }
+                        else
+                            Report(0);
+                        break;
                     default:
                         valid = true;
                         guess = RandomGuess();
@@ -430,6 +549,20 @@ namespace Battleship
             }
 
             return guess;
+        }
+
+        // created a reserve multi hit
+        private void SaveMultiHit()
+        {
+            Queue<Coords> newMultiHit = new Queue<Coords>();
+
+            foreach (Coords coord in pastHits)
+            {
+                newMultiHit.Enqueue(coord);
+            }
+
+            chainedMultiHits.Enqueue(newMultiHit);
+            pastHits.Clear();
         }
 
         // copies the past hits to a new multiHit list to contain a list of ships to go down
@@ -529,6 +662,7 @@ namespace Battleship
             pastHits.Clear();
             hitArea.Clear();
             multiHit.Clear();
+            chainedMultiHits.Clear();
         }
 
         // find whether we are going horizontal or vertical
