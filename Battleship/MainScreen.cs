@@ -63,6 +63,11 @@ namespace Battleship
             {
                 // implement MP game here
             }
+
+            // show the initial explanation box
+            MessageBox.Show("To place a ship, click on a location on the Player Board. Click again to flip to vertical placement. When you are happy with the ships location " +
+                "(indicated by the outline, green if valid, red if invalid) click the button to confirm ship placement. After placement of ships select a zone on your opponents " +
+                "board to begin firing. Good luck!", "Instructions");
         }
 
         private void PositionClick(object sender, EventArgs e)
@@ -310,7 +315,7 @@ namespace Battleship
 
             if (shipsSunk > 4)
             {
-                MessageBox.Show("You lost", "Defeat");
+                MessageBox.Show("You lost, better luck next time", "Defeat");
                 Close();
             }
         }
