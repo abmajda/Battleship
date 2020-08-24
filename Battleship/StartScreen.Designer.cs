@@ -117,7 +117,7 @@
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.MaximizeBox = false;
             this.Name = "StartScreen";
-            this.Text = "Battleship";
+            this.Text = "Battleship by Andrew Majda";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

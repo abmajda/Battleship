@@ -17,6 +17,7 @@ namespace Battleship
         private Coords hitSpot;
         private List<Ship> ships = new List<Ship>();
         private int AIstate;
+        private int shipsSunk;
         Random randomizer = new Random();
 
         public AIOpponent()
@@ -54,6 +55,8 @@ namespace Battleship
             randomPosition = PlaceShip(2);
             PTBoat ptboat = new PTBoat(randomPosition.startPosition, randomPosition.horizontal);
             ships.Add(ptboat);
+
+            shipsSunk = 0;
         }
         
         // resolves the shot from the player
@@ -66,30 +69,34 @@ namespace Battleship
                     // if we sunk a ship, report it's ship code to announce it is sunk
                     if (ship.Sunk())
                     {
-                        // if all ships are sunk
                         // Carrier ship code is 6
                         if (ship is Carrier)
                         {
+                            shipsSunk++;
                             return 6;
                         }
                         // Battleship ship code is 5
                         else if (ship is Battleship)
                         {
+                            shipsSunk++;
                             return 5;
                         }
                         // Destroyer ship code is 4
                         else if (ship is Destroyer)
                         {
+                            shipsSunk++;
                             return 4;
                         }
                         // Submarine ship code is 3
                         else if (ship is Submarine)
                         {
+                            shipsSunk++;
                             return 3;
                         }
                         // PTBoat ship code is 2
                         else if (ship is PTBoat)
                         {
+                            shipsSunk++;
                             return 2;
                         }
                     }
@@ -101,6 +108,15 @@ namespace Battleship
 
             // if nothing is hit return a 0 to indicate miss
             return 0;
+        }
+
+        // check if the AI has lost, return true if lost
+        public bool CheckLose()
+        {
+            if (shipsSunk > 4)
+                return true;
+            else
+                return false;
         }
 
         // takes the result of the guess and sets state accordingly

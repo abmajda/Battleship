@@ -26,15 +26,17 @@ namespace Battleship
     public partial class MainScreen : Form
     {
         // a queue of ships that have not been placed yet
-        Queue<ShipInfo> shipsToPlace;
+        private Queue<ShipInfo> shipsToPlace;
         // a list of coordinates to keep track of where to display the ship outline
-        List<Coords> placementOutline;
+        private List<Coords> placementOutline;
         // a boolean to check if the position for placement is valid
-        bool validPlacement = false;
+        private bool validPlacement = false;
         // a placeholder for an AI to be initialized if play against the aI is selected
-        AIOpponent AI;
+        private AIOpponent AI;
         // the players ship locations
-        List<Ship> playerShips;
+        private List<Ship> playerShips;
+        // keeps track of how many ships are sunk
+        private int shipsSunk;
 
 
         public MainScreen(bool AISelection)
@@ -202,6 +204,7 @@ namespace Battleship
                 }
 
                 PlaceButton.Enabled = false;
+                shipsSunk = 0;
             }
         }
 
@@ -217,6 +220,7 @@ namespace Battleship
                 int result = AI.ResolveShot(playerShot);
                 UpdateLabel(true, result);
 
+                // if a miss, chance to miss color, otherwise turn hit color and check for sunk
                 if (result == 0)
                 {
                     selected.BackColor = Color.AliceBlue;
@@ -224,16 +228,42 @@ namespace Battleship
                 else
                 {
                     selected.BackColor = Color.Red;
-                    // temporary code
+                    
+                    // adjust the ship labels if a ship was sunk
                     if (result > 1)
                     {
-
+                        switch(result)
+                        {
+                            case 2:
+                                OpponentPTBoatLabel.Font = new Font(OpponentPTBoatLabel.Font, FontStyle.Strikeout);
+                                break;
+                            case 3:
+                                OpponentSubmarineLabel.Font = new Font(OpponentSubmarineLabel.Font, FontStyle.Strikeout);
+                                break;
+                            case 4:
+                                OpponentDestroyerLabel.Font = new Font(OpponentDestroyerLabel.Font, FontStyle.Strikeout);
+                                break;
+                            case 5:
+                                OpponentBattleshipLabel.Font = new Font(OpponentBattleshipLabel.Font, FontStyle.Strikeout);
+                                break;
+                            case 6:
+                                OpponentCarrierLabel.Font = new Font(OpponentCarrierLabel.Font, FontStyle.Strikeout);
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
             // if the have already selected that space it will not be the normal color and we can discout their click
             else
                 return;
+
+            if(AI.CheckLose())
+            {
+                MessageBox.Show("You won!", "Victory!");
+                Close();
+            }
 
             // now the opponent shoots at us **temporary code ***
             Coords opponentShot = AI.TakeTurn();
@@ -243,7 +273,7 @@ namespace Battleship
 
             Control label = BoardTable.GetControlFromPosition(opponentShot.x, opponentShot.y);
 
-            // *** expand out, super temporary code ***
+            // if a miss, chance to miss color, otherwise turn hit color and check for sunk
             if (shotResult == 0)
             {
                 label.BackColor = Color.AliceBlue;
@@ -251,6 +281,37 @@ namespace Battleship
             else
             {
                 label.BackColor = Color.Red;
+
+                // adjust the ship labels if a ship was sunk
+                if (shotResult > 1)
+                {
+                    switch (shotResult)
+                    {
+                        case 2:
+                            PlayerPTBoatLabel.Font = new Font(PlayerPTBoatLabel.Font, FontStyle.Strikeout);
+                            break;
+                        case 3:
+                            PlayerSubmarineLabel.Font = new Font(PlayerSubmarineLabel.Font, FontStyle.Strikeout);
+                            break;
+                        case 4:
+                            PlayerDestroyerLabel.Font = new Font(PlayerDestroyerLabel.Font, FontStyle.Strikeout);
+                            break;
+                        case 5:
+                            PlayerBattleshipLabel.Font = new Font(PlayerBattleshipLabel.Font, FontStyle.Strikeout);
+                            break;
+                        case 6:
+                            PlayerCarrierLabel.Font = new Font(PlayerCarrierLabel.Font, FontStyle.Strikeout);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            if (shipsSunk > 4)
+            {
+                MessageBox.Show("You lost", "Defeat");
+                Close();
             }
         }
 
@@ -264,30 +325,34 @@ namespace Battleship
                     // if we sunk a ship, report it's ship code to announce it is sunk
                     if (ship.Sunk())
                     {
-                        // if all ships are sunk
                         // Carrier ship code is 6
                         if (ship is Carrier)
                         {
+                            shipsSunk++;
                             return 6;
                         }
                         // Battleship ship code is 5
                         else if (ship is Battleship)
                         {
+                            shipsSunk++;
                             return 5;
                         }
                         // Destroyer ship code is 4
                         else if (ship is Destroyer)
                         {
+                            shipsSunk++;
                             return 4;
                         }
                         // Submarine ship code is 3
                         else if (ship is Submarine)
                         {
+                            shipsSunk++;
                             return 3;
                         }
                         // PTBoat ship code is 2
                         else if (ship is PTBoat)
                         {
+                            shipsSunk++;
                             return 2;
                         }
                     }

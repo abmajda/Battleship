@@ -236,6 +236,16 @@
             this.BottomStatusLabel = new System.Windows.Forms.Label();
             this.BoardLabel = new System.Windows.Forms.Label();
             this.OpponentLabel = new System.Windows.Forms.Label();
+            this.PlayerCarrierLabel = new System.Windows.Forms.Label();
+            this.PlayerBattleshipLabel = new System.Windows.Forms.Label();
+            this.PlayerDestroyerLabel = new System.Windows.Forms.Label();
+            this.PlayerSubmarineLabel = new System.Windows.Forms.Label();
+            this.PlayerPTBoatLabel = new System.Windows.Forms.Label();
+            this.OpponentPTBoatLabel = new System.Windows.Forms.Label();
+            this.OpponentSubmarineLabel = new System.Windows.Forms.Label();
+            this.OpponentDestroyerLabel = new System.Windows.Forms.Label();
+            this.OpponentBattleshipLabel = new System.Windows.Forms.Label();
+            this.OpponentCarrierLabel = new System.Windows.Forms.Label();
             this.BoardTable.SuspendLayout();
             this.OpponentBoard.SuspendLayout();
             this.SuspendLayout();
@@ -3158,11 +3168,111 @@
             this.OpponentLabel.TabIndex = 8;
             this.OpponentLabel.Text = "Your Opponents Board";
             // 
+            // PlayerCarrierLabel
+            // 
+            this.PlayerCarrierLabel.Location = new System.Drawing.Point(95, 330);
+            this.PlayerCarrierLabel.Name = "PlayerCarrierLabel";
+            this.PlayerCarrierLabel.Size = new System.Drawing.Size(100, 20);
+            this.PlayerCarrierLabel.TabIndex = 9;
+            this.PlayerCarrierLabel.Text = "Carrier";
+            this.PlayerCarrierLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PlayerBattleshipLabel
+            // 
+            this.PlayerBattleshipLabel.Location = new System.Drawing.Point(95, 350);
+            this.PlayerBattleshipLabel.Name = "PlayerBattleshipLabel";
+            this.PlayerBattleshipLabel.Size = new System.Drawing.Size(100, 20);
+            this.PlayerBattleshipLabel.TabIndex = 10;
+            this.PlayerBattleshipLabel.Text = "Battleship";
+            this.PlayerBattleshipLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PlayerDestroyerLabel
+            // 
+            this.PlayerDestroyerLabel.Location = new System.Drawing.Point(95, 370);
+            this.PlayerDestroyerLabel.Name = "PlayerDestroyerLabel";
+            this.PlayerDestroyerLabel.Size = new System.Drawing.Size(100, 20);
+            this.PlayerDestroyerLabel.TabIndex = 11;
+            this.PlayerDestroyerLabel.Text = "Destroyer";
+            this.PlayerDestroyerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PlayerSubmarineLabel
+            // 
+            this.PlayerSubmarineLabel.Location = new System.Drawing.Point(95, 390);
+            this.PlayerSubmarineLabel.Name = "PlayerSubmarineLabel";
+            this.PlayerSubmarineLabel.Size = new System.Drawing.Size(100, 20);
+            this.PlayerSubmarineLabel.TabIndex = 12;
+            this.PlayerSubmarineLabel.Text = "Submarine";
+            this.PlayerSubmarineLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // PlayerPTBoatLabel
+            // 
+            this.PlayerPTBoatLabel.Location = new System.Drawing.Point(95, 410);
+            this.PlayerPTBoatLabel.Name = "PlayerPTBoatLabel";
+            this.PlayerPTBoatLabel.Size = new System.Drawing.Size(100, 20);
+            this.PlayerPTBoatLabel.TabIndex = 13;
+            this.PlayerPTBoatLabel.Text = "PT Boat";
+            this.PlayerPTBoatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OpponentPTBoatLabel
+            // 
+            this.OpponentPTBoatLabel.Location = new System.Drawing.Point(605, 410);
+            this.OpponentPTBoatLabel.Name = "OpponentPTBoatLabel";
+            this.OpponentPTBoatLabel.Size = new System.Drawing.Size(100, 20);
+            this.OpponentPTBoatLabel.TabIndex = 18;
+            this.OpponentPTBoatLabel.Text = "PT Boat";
+            this.OpponentPTBoatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OpponentSubmarineLabel
+            // 
+            this.OpponentSubmarineLabel.Location = new System.Drawing.Point(605, 390);
+            this.OpponentSubmarineLabel.Name = "OpponentSubmarineLabel";
+            this.OpponentSubmarineLabel.Size = new System.Drawing.Size(100, 20);
+            this.OpponentSubmarineLabel.TabIndex = 17;
+            this.OpponentSubmarineLabel.Text = "Submarine";
+            this.OpponentSubmarineLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OpponentDestroyerLabel
+            // 
+            this.OpponentDestroyerLabel.Location = new System.Drawing.Point(605, 370);
+            this.OpponentDestroyerLabel.Name = "OpponentDestroyerLabel";
+            this.OpponentDestroyerLabel.Size = new System.Drawing.Size(100, 20);
+            this.OpponentDestroyerLabel.TabIndex = 16;
+            this.OpponentDestroyerLabel.Text = "Destroyer";
+            this.OpponentDestroyerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OpponentBattleshipLabel
+            // 
+            this.OpponentBattleshipLabel.Location = new System.Drawing.Point(605, 350);
+            this.OpponentBattleshipLabel.Name = "OpponentBattleshipLabel";
+            this.OpponentBattleshipLabel.Size = new System.Drawing.Size(100, 20);
+            this.OpponentBattleshipLabel.TabIndex = 15;
+            this.OpponentBattleshipLabel.Text = "Battleship";
+            this.OpponentBattleshipLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // OpponentCarrierLabel
+            // 
+            this.OpponentCarrierLabel.Location = new System.Drawing.Point(605, 330);
+            this.OpponentCarrierLabel.Name = "OpponentCarrierLabel";
+            this.OpponentCarrierLabel.Size = new System.Drawing.Size(100, 20);
+            this.OpponentCarrierLabel.TabIndex = 14;
+            this.OpponentCarrierLabel.Text = "Carrier";
+            this.OpponentCarrierLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 461);
+            this.Controls.Add(this.OpponentPTBoatLabel);
+            this.Controls.Add(this.OpponentSubmarineLabel);
+            this.Controls.Add(this.OpponentDestroyerLabel);
+            this.Controls.Add(this.OpponentBattleshipLabel);
+            this.Controls.Add(this.OpponentCarrierLabel);
+            this.Controls.Add(this.PlayerPTBoatLabel);
+            this.Controls.Add(this.PlayerSubmarineLabel);
+            this.Controls.Add(this.PlayerDestroyerLabel);
+            this.Controls.Add(this.PlayerBattleshipLabel);
+            this.Controls.Add(this.PlayerCarrierLabel);
             this.Controls.Add(this.OpponentLabel);
             this.Controls.Add(this.BoardLabel);
             this.Controls.Add(this.BottomStatusLabel);
@@ -3173,7 +3283,7 @@
             this.Controls.Add(this.BoardTable);
             this.MaximizeBox = false;
             this.Name = "MainScreen";
-            this.Text = "MainScreen";
+            this.Text = "Battleship by Andrew Majda";
             this.BoardTable.ResumeLayout(false);
             this.BoardTable.PerformLayout();
             this.OpponentBoard.ResumeLayout(false);
@@ -3393,5 +3503,15 @@
         private System.Windows.Forms.Label label198;
         private System.Windows.Forms.Label label199;
         private System.Windows.Forms.Label label200;
+        private System.Windows.Forms.Label PlayerCarrierLabel;
+        private System.Windows.Forms.Label PlayerBattleshipLabel;
+        private System.Windows.Forms.Label PlayerDestroyerLabel;
+        private System.Windows.Forms.Label PlayerSubmarineLabel;
+        private System.Windows.Forms.Label PlayerPTBoatLabel;
+        private System.Windows.Forms.Label OpponentPTBoatLabel;
+        private System.Windows.Forms.Label OpponentSubmarineLabel;
+        private System.Windows.Forms.Label OpponentDestroyerLabel;
+        private System.Windows.Forms.Label OpponentBattleshipLabel;
+        private System.Windows.Forms.Label OpponentCarrierLabel;
     }
 }
