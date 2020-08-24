@@ -215,6 +215,8 @@ namespace Battleship
             {
                 Coords playerShot = new Coords(OpponentBoard.GetRow(selected), OpponentBoard.GetColumn(selected));
                 int result = AI.ResolveShot(playerShot);
+                UpdateLabel(true, result);
+
                 if (result == 0)
                 {
                     selected.BackColor = Color.AliceBlue;
@@ -237,6 +239,8 @@ namespace Battleship
             Coords opponentShot = AI.TakeTurn();
             int shotResult = ResolveShot(opponentShot);
             AI.Report(shotResult);
+            UpdateLabel(false, shotResult);
+
             Control label = BoardTable.GetControlFromPosition(opponentShot.x, opponentShot.y);
 
             // *** expand out, super temporary code ***
@@ -295,6 +299,67 @@ namespace Battleship
 
             // if nothing is hit return a 0 to indicate miss
             return 0;
+        }
+
+        private void UpdateLabel(bool player, int result)
+        {
+            string status = "";
+
+            // start with the player name
+            if (player)
+                status += "You ";
+            else
+                status += "Opponent ";
+
+            // handle miss
+            if (result == 0)
+            {
+                status += "missed";
+            }
+            // handle generic hit
+            else if (result == 1)
+            {
+                status += "scored a hit";
+            }
+            // handle sinking
+            else if (result > 1)
+            {
+                status += "sunk ";
+                if (player)
+                    status += "your opponent's ";
+                else
+                    status += "your ";
+
+                switch(result)
+                {
+                    case 2:
+                        status += "PT Boat!";
+                        break;
+                    case 3:
+                        status += "Submarine!";
+                        break;
+                    case 4:
+                        status += "Destroyer!";
+                        break;
+                    case 5:
+                        status += "Battleship!";
+                        break;
+                    case 6:
+                        status += "Carrier!";
+                        break;
+                    default:
+                        status = "something has gone horribly wrong";
+                        break;
+                }
+            }
+            // shouldn't ever get here
+            else
+            {
+                status = "something went horribly wrong";
+            }
+
+            TopStatusLabel.Text = BottomStatusLabel.Text;
+            BottomStatusLabel.Text = status;
         }
     }
 }

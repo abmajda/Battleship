@@ -3128,7 +3128,7 @@
             this.TopStatusLabel.Name = "TopStatusLabel";
             this.TopStatusLabel.Size = new System.Drawing.Size(200, 15);
             this.TopStatusLabel.TabIndex = 5;
-            this.TopStatusLabel.Text = "You scored a hit!";
+            this.TopStatusLabel.Text = " ";
             this.TopStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BottomStatusLabel
@@ -3137,7 +3137,7 @@
             this.BottomStatusLabel.Name = "BottomStatusLabel";
             this.BottomStatusLabel.Size = new System.Drawing.Size(200, 15);
             this.BottomStatusLabel.TabIndex = 6;
-            this.BottomStatusLabel.Text = "Your battleship was sunk";
+            this.BottomStatusLabel.Text = " ";
             this.BottomStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BoardLabel
